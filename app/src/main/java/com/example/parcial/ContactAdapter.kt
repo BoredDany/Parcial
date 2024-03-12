@@ -10,7 +10,7 @@ import androidx.cursoradapter.widget.CursorAdapter
 
 class ContactAdapter (context: Context?, c: Cursor?, flags: Int) : CursorAdapter(context, c, flags){
     private val CONTACT_ID_INDEX = 0
-    private val DISPLAY_NAME_INDEX = 1
+    val DISPLAY_NAME_INDEX = 1
     override fun newView(context: Context?, cursor: Cursor?, parent: ViewGroup?): View {
         return LayoutInflater.from(context)
             .inflate(R.layout.view_contact, parent, false)

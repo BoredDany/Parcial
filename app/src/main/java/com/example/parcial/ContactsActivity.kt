@@ -34,6 +34,15 @@ class ContactsActivity : AppCompatActivity() {
 
         initView()
 
+        mlista.setOnItemClickListener { parent, view, position, id ->
+            val cursor = mContactsAdapter!!.cursor
+            val displayNameIndex = mContactsAdapter!!.DISPLAY_NAME_INDEX
+            if (cursor != null && cursor.moveToPosition(position)) {
+                val name = cursor.getString(displayNameIndex)
+                Toast.makeText(this, "Contact name: $name", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     //PERMISSION
