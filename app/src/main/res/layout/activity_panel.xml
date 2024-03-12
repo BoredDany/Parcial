@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PanelActivity"
+    android:background="@color/moraBack"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="146dp"
+                tools:layout_editor_absoluteY="114dp"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/concert_one"
+                android:text="Name:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/moraFieldBack"
+                android:text="" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/concert_one"
+                android:text="Birthday:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@color/moraFieldBack"
+                android:text="" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/mora"
+                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/concert_one"
+                android:text="Gender:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/moraFieldBack"
+                android:text="" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contactos"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="486dp" />
+
+        <Button
+            android:id="@+id/btnFavs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="favoritos"
+            tools:layout_editor_absoluteX="213dp"
+            tools:layout_editor_absoluteY="484dp" />
+
+
+        <Button
+            android:id="@+id/btnExplorer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="explorer"
+            tools:layout_editor_absoluteX="207dp"
+            tools:layout_editor_absoluteY="628dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
