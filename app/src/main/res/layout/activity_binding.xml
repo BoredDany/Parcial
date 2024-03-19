@@ -24,11 +24,20 @@
         android:layout_below="@+id/latitude"/>
 
     <TextView
-        android:id="@+id/locationTxt"
+        android:id="@+id/elevation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="25sp"
-        android:text="TextView"
+        android:text="Elevacion:"
         android:layout_below="@+id/longitude"/>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/elevation"
+        android:layout_centerInParent="true"
+        android:textSize="25sp"
+        android:text="Distancia:" />
 </RelativeLayout>
