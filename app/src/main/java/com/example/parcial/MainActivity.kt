@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val btnCamera = findViewById<ImageButton>(R.id.btnCamera)
         val btnGallery = findViewById<ImageButton>(R.id.btnGallery)
         val btnGo = findViewById<Button>(R.id.btnGo)
+        val btnLocation = findViewById<ImageButton>(R.id.btnLocation)
 
         //SPINNER
         gender.onItemSelectedListener = this
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         //GO
         btnGo.setOnClickListener { goToPanel(gender) }
+
+        btnLocation.setOnClickListener {
+            val intent = Intent(this, BindingActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
