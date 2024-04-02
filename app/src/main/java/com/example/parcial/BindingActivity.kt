@@ -79,6 +79,11 @@ class BindingActivity : AppCompatActivity() {
         //acceso directo a los objetos
         binding.distance.text ="distance"
 
+        binding.btnmaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
