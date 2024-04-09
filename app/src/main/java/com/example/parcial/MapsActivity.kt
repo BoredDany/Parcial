@@ -31,12 +31,15 @@ import java.io.IOException
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    //No deben estar como lateinit var, deben inicializarse antes del onCreate ()
     private var mMap: GoogleMap ?= null
+    private var mGeocoder: Geocoder? = null
+
     private lateinit var binding: ActivityMapsBinding
     private lateinit var mSensorManager: SensorManager
     private lateinit var mLiteSensor: Sensor
     private lateinit var mLightSensorEventListener: SensorEventListener
-    private lateinit var mGeocoder: Geocoder
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,44 +68,55 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         //buscar direccion
-        mGeocoder = Geocoder(baseContext)
         val text = findViewById<EditText>(R.id.buscaTxt)
         val addressString = text.toString()
 
+        //objeto de oantalla (geocoder) modifica el mapa, listenner debe estar en onCreate ()
         text.setOnEditorActionListener { v, actionId, event ->
-            if(actionId == EditorInfo.IME_ACTION_SEND) {
-                if (addressString.isNotEmpty()) {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                val texto = text.text.toString()
+                if (texto.isNotEmpty()) {
                     try {
-                        val addresses = mGeocoder.getFromLocationName(addressString, 2)
-                        if (addresses != null && addresses.isNotEmpty()) {
-                            val addressResult = addresses[0]
-                            val position = LatLng(addressResult.latitude, addressResult.longitude)
-                            if (mMap != null) {
+                        if (mMap != null && mGeocoder != null) {
+                            val addresses = mGeocoder!!.getFromLocationName(texto, 2)
+                            if (addresses != null && addresses.isNotEmpty()) {
+                                val addressResult = addresses[0]
+                                val position =
+                                    LatLng(addressResult.latitude, addressResult.longitude)
+
                                 //Agregar Marcador al mapa
                                 mMap!!.moveCamera(CameraUpdateFactory.zoomTo(15F))
                                 mMap!!.moveCamera(CameraUpdateFactory.newLatLng(position))
-                                mMap!!.addMarker(MarkerOptions().position(position).title("PGEOCODER").snippet("GEOCODER").alpha(1F));
-
+                                mMap!!.addMarker(
+                                    MarkerOptions().position(position)
+                                        .title("Posicion Geocoder")
+                                        .snippet("algo 1")
+                                        .alpha(1f)
+                                )
                             } else {
-                                Toast.makeText(this, "Dirección no encontrada", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Dirección no encontrada", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
+
                 } else {
                     Toast.makeText(this, "La dirección esta vacía", Toast.LENGTH_SHORT).show()
+
                 }
+
             }
             true
         }
 
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
     }
 
     /**
@@ -116,33 +130,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mGeocoder = Geocoder(baseContext)
 
         //mMap!!.uiSettings.isZoomGesturesEnabled = true
 
         mMap!!.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style_silver))
 
-
-
-
-
         // Add a marker in Sydney and move the camera
         val bolivar = LatLng(4.59813470563, -74.0760469437)
         val museo = LatLng(4.60209158756, -74.0718841553)
-        val m1 = LatLng(4.70209158756, -74.0658841553)
+        val javeriana = LatLng(4.70209158756, -74.0658841553)
         val m2 = LatLng(4.90209158756, -74.0608841553)
         val m3 = LatLng(4.10009158756, -74.0508841553)
 
         mMap!!.moveCamera(CameraUpdateFactory.zoomTo(10F))
-        mMap!!.moveCamera(CameraUpdateFactory.newLatLng(bolivar))
-        mMap!!.addMarker(MarkerOptions().position(bolivar).title("Plaza de bolivar").snippet("plaza").alpha(0.5F));
-        mMap!!.addMarker(MarkerOptions().position(museo).title("Museo del oro").snippet("cultura").alpha(1F));
+        mMap!!.moveCamera(CameraUpdateFactory.newLatLng(javeriana))
+
+        mMap!!.addMarker(MarkerOptions().position(javeriana).title("JAVERIANA").snippet("Javeriana").alpha(0.5F));
+
+        /*mMap!!.addMarker(MarkerOptions().position(museo).title("Museo del oro").snippet("cultura").alpha(1F));
         mMap!!.addMarker(MarkerOptions().position(m1).title("m1").snippet("otro m1").alpha(1F));
         mMap!!.addMarker(MarkerOptions().position(m2).title("m2").snippet("orr").alpha(1F));
-        mMap!!.addMarker(MarkerOptions().position(m3).title("m3").snippet("m3").alpha(1F));
+        mMap!!.addMarker(MarkerOptions().position(m3).title("m3").snippet("m3").alpha(1F));*/
 
-        //eliminar marcadroes
 
-        //limpiar mapa
+
+        //Listenner en el mapa
+        mMap!!.setOnMapLongClickListener { latLng ->
+            /*mMap!!.clear()
+            mMap!!.addMarker(MarkerOptions().position(latLng).title(geoCoderSearchLatLang(latLng)))*/
+        }
+
+
     }
 
     override fun onResume() {
